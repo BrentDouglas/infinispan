@@ -25,7 +25,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.infinispan</groupId>
    <artifactId>infinispan-parent</artifactId>
-   <version>5.2.6-SNAPSHOT</version>
+   <version>5.2.6.Brite</version>
    <packaging>pom</packaging>
    <name>Infinispan Common Parent</name>
    <description>Infinispan common parent POM module</description>
@@ -1190,7 +1190,7 @@
                               </goals>
                            </pluginExecutionFilter>
                            <action>
-                              <ignore></ignore>
+                              <ignore />
                            </action>
                         </pluginExecution>
                         <pluginExecution>
@@ -1203,7 +1203,7 @@
                               </goals>
                            </pluginExecutionFilter>
                            <action>
-                              <ignore></ignore>
+                              <ignore />
                            </action>
                         </pluginExecution>
                         <pluginExecution>
@@ -1216,7 +1216,7 @@
                               </goals>
                            </pluginExecutionFilter>
                            <action>
-                              <ignore></ignore>
+                              <ignore />
                            </action>
                         </pluginExecution>
                         <pluginExecution>
@@ -1229,7 +1229,7 @@
                               </goals>
                            </pluginExecutionFilter>
                            <action>
-                              <ignore></ignore>
+                              <ignore />
                            </action>
                         </pluginExecution>
                         <pluginExecution>
@@ -1243,7 +1243,7 @@
                               </goals>
                            </pluginExecutionFilter>
                            <action>
-                              <ignore></ignore>
+                              <ignore />
                            </action>
                         </pluginExecution>
                         <pluginExecution>
@@ -1256,7 +1256,7 @@
                               </goals>
                            </pluginExecutionFilter>
                            <action>
-                              <ignore></ignore>
+                              <ignore />
                            </action>
                         </pluginExecution>
                      </pluginExecutions>
@@ -1330,7 +1330,7 @@
                   <configuration>
                      <skip>${module.skipComponentMetaDataProcessing}</skip>
                      <target>
-                        <copy file="${basedir}/src/main/resources/${project.artifactId}-component-metadata.dat" todir="${project.build.outputDirectory}"></copy>
+                        <copy file="${basedir}/src/main/resources/${project.artifactId}-component-metadata.dat" todir="${project.build.outputDirectory}" />
                      </target>
                   </configuration>
                </execution>
@@ -1881,7 +1881,7 @@
                                     <sourcefiles encoding="UTF-8">
                                        <mappedresources>
                                           <fileset dir="${dir.ispn}" includes="**/src/main/java/**/*.java" />
-                                          <mapper type="regexp" from="^(.*/java/)(.*)$" to="\2"/>
+                                          <mapper type="regexp" from="^(.*/java/)(.*)$" to="\2" />
                                        </mappedresources>
                                     </sourcefiles>
 
