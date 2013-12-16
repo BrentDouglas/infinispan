@@ -126,17 +126,7 @@ public class TransactionTable {
       totalOrder = configuration.transaction().transactionProtocol().isTotalOrder();
       if (!totalOrder) {
          // Periodically run a task to cleanup the transaction table from completed transactions.
-         ThreadFactory tf = new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-               String address = rpcManager != null ? rpcManager.getTransport().getAddress().toString() : "local";
-               Thread th = new Thread(r, "TxCleanupService," + cacheName + "," + address);
-               th.setDaemon(true);
-               return th;
-            }
-         };
-
-         executorService = Executors.newSingleThreadScheduledExecutor(tf);
+         executorService = Executors.newSingleThreadScheduledExecutor(new TxCleanupThreadFactory(rpcManager, cacheName));
 
          long interval = configuration.transaction().reaperWakeUpInterval();
          executorService.scheduleAtFixedRate(new Runnable() {
@@ -556,6 +546,24 @@ public class TransactionTable {
          } catch (Exception e) {
             log.errorf(e, "Failed to cleanup completed transactions: %s", e.getMessage());
          }
+      }
+   }
+
+   private static class TxCleanupThreadFactory implements ThreadFactory {
+      private final RpcManager rpcManager;
+      private final String cacheName;
+
+      private TxCleanupThreadFactory(final RpcManager rpcManager, final String cacheName) {
+         this.rpcManager = rpcManager;
+         this.cacheName = cacheName;
+      }
+       @Override
+      public Thread newThread(Runnable r) {
+         String address = rpcManager != null ? rpcManager.getTransport().getAddress().toString() : "local";
+         Thread th = new Thread(r, "TxCleanupService," + cacheName + "," + address);
+         th.setDaemon(true);
+         th.setContextClassLoader(TransactionTable.class.getClassLoader());
+         return th;
       }
    }
 }
