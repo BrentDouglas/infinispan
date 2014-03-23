@@ -766,7 +766,7 @@ public class DefaultExecutorService extends AbstractExecutorService implements D
     * @author Mircea Markus
     * @author Vladimir Blagojevic
     */
-   private abstract class DistributedTaskPart<V> implements NotifyingFuture<V>, RunnableFuture<V> {
+   protected abstract class DistributedTaskPart<V> implements NotifyingFuture<V>, RunnableFuture<V> {
 
       protected final DistributedExecuteCommand<V> distCommand;
       private final List<Object> inputKeys;
@@ -951,7 +951,7 @@ public class DefaultExecutorService extends AbstractExecutorService implements D
       }
    }
 
-   private class RemoteDistributedTaskPart<V> extends DistributedTaskPart<V> {
+   protected class RemoteDistributedTaskPart<V> extends DistributedTaskPart<V> {
       private final Address executionTarget;
       private final NotifyingFutureImpl<Object> future = new NotifyingFutureImpl<Object>();
 
@@ -1045,7 +1045,7 @@ public class DefaultExecutorService extends AbstractExecutorService implements D
       }
    }
 
-   private class LocalDistributedTaskPart<V> extends DistributedTaskPart<V> {
+   protected class LocalDistributedTaskPart<V> extends DistributedTaskPart<V> {
       private final NotifyingFutureImpl<V> future = new NotifyingFutureImpl<V>();
 
       public LocalDistributedTaskPart(DistributedTask<V> task, DistributedExecuteCommand<V> command,
